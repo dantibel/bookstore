@@ -3,8 +3,10 @@ package fi.haagahelia.bookstore.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fi.haagahelia.bookstore.domain.Book;
 import fi.haagahelia.bookstore.domain.BookRepository;
 
 @Controller
@@ -27,4 +29,16 @@ public class BookController {
         return "booklist";
     }
     
+    @GetMapping("/addbook")
+    public String addBookForm(Model model) {
+        model.addAttribute("book", new Book());
+        return "addbook";
+    }
+
+    @PostMapping("/addbook")
+    public String addBook(Book book, Model model) {
+        repository.save(book);
+        model.addAttribute("books", repository.findAll());
+        return "booklist";
+    }
 }
