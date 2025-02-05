@@ -3,44 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Book List</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
     <h1>Book List</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Author</th>
-                <th>Title</th>
-                <th>ISBN</th>
-                <th>Year</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.author}">Author Name</td>
-                <td th:text="${book.title}">Book Title</td>
-                <td th:text="${book.isbn}">1234567-89</td>
-                <td th:text="${book.year}">0000</td>
-                <td>
-                    <a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="/addbook">Add New Book</a>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Year</th>
+                    <th class="action-cell">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.author}">Author Name</td>
+                    <td th:text="${book.title}">Book Title</td>
+                    <td th:text="${book.isbn}">1234567-89</td>
+                    <td th:text="${book.year}">0000</td>
+                    <td class="action-cell">
+                        <a th:href="@{/deletebook/{id}(id=${book.id})}" class="delete-button">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/addbook" class="button">Add New Book</a>
+    </div>
 </body>
 </html>
