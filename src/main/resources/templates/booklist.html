@@ -30,6 +30,9 @@
                         <a th:href="@{/deletebook/{id}(id=${book.id})}" class="delete-button">
                             <i class="fas fa-trash"></i>
                         </a>
+                        <a th:href="@{/editbook/{id}(id=${book.id})}" class="edit-button">
+                            <i class="fas fa-edit"></i>
+                        </a>
                     </td>
                 </tr>
             </tbody>

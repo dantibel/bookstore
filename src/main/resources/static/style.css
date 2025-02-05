@@ -80,6 +80,7 @@ input[type="year"] {
     box-sizing: border-box;
 }
 
+/* Button styles */
 button {
     width: 100%;
     padding: 10px;
@@ -109,7 +110,6 @@ a.button:hover {
     background-color: #45a049;
 }
 
-/* Delete button styles */
 .action-cell {
     text-align: center;
 }
@@ -121,4 +121,13 @@ a.button:hover {
 
 .delete-button:hover {
     color: darkred;
+}
+
+.edit-button {
+    color: rgb(28, 88, 255);
+    font-size: 1.2em;
+}
+
+.edit-button:hover {
+    color: rgb(15, 54, 160);
 }

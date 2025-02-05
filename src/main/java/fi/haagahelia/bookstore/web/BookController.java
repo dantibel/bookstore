@@ -1,5 +1,7 @@
 package fi.haagahelia.bookstore.web;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,5 +50,17 @@ public class BookController {
         repository.deleteById(bookId);
         model.addAttribute("books", repository.findAll());
         return "booklist";
+    }
+
+    // TODO: fix adding new book entry instead of editing existing one
+    @GetMapping("/editbook/{bookId}")
+    public String editBook(@PathVariable Long bookId, Model model) {
+        Optional<Book> optionalBook = repository.findById(bookId);
+        if (!optionalBook.isPresent()) {
+            System.out.println("Error: Boook #" + bookId + " not found. It may have been deleted.");
+            return "redirect:/booklist";
+        }
+        model.addAttribute("book", optionalBook.get());
+        return "addbook";
     }
 }
