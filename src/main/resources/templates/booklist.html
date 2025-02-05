@@ -35,6 +35,9 @@
                 <td th:text="${book.title}">Book Title</td>
                 <td th:text="${book.isbn}">1234567-89</td>
                 <td th:text="${book.year}">0000</td>
+                <td>
+                    <a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a>
+                </td>
             </tr>
         </tbody>
     </table>
