@@ -23,6 +23,12 @@
             <input type="number" id="year" th:field="${book.year}" required max="3000" step="1">
         </div>
         <div>
+            <label for="category">Category</label>
+            <select id="category" th:field="${book.category}" class="form-control" required>
+                <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+        <div>
             <label for="isbn">ISBN:</label>
             <input type="text" id="isbn" th:field="${book.isbn}" required>
         </div>

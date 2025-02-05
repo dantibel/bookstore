@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.bookstore.domain.Book;
 import fi.haagahelia.bookstore.domain.BookRepository;
+import fi.haagahelia.bookstore.domain.Category;
+import fi.haagahelia.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
 
-    private final BookRepository repository;
+    private BookRepository bookRepo;
+    private CategoryRepository categoryRepo;
 
-    public BookController(BookRepository repository) {
-        this.repository = repository;
+    public BookController(BookRepository bookRepo, CategoryRepository categoryRepo) {
+        this.bookRepo = bookRepo;
+        this.categoryRepo = categoryRepo;
     }
     
     @GetMapping("/index")
@@ -28,34 +32,35 @@ public class BookController {
 
     @GetMapping("/booklist")
     public String showBookList(Model model) {
-        model.addAttribute("books", repository.findAll());
+        model.addAttribute("books", bookRepo.findAll());
         return "booklist";
     }
     
     @GetMapping("/addbook")
     public String addBookForm(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepo.findAll());
         return "addbook";
     }
 
     @PostMapping("/addbook")
     public String addBook(Book book, Model model) {
-        repository.save(book);
-        model.addAttribute("books", repository.findAll());
+        bookRepo.save(book);
+        model.addAttribute("books", bookRepo.findAll());
         return "booklist";
     }
 
     @GetMapping("/deletebook/{bookId}")
     public String deleteBook(@PathVariable Long bookId, Model model) {
-        repository.deleteById(bookId);
-        model.addAttribute("books", repository.findAll());
+        bookRepo.deleteById(bookId);
+        model.addAttribute("books", bookRepo.findAll());
         return "booklist";
     }
 
     // TODO: fix adding new book entry instead of editing existing one
     @GetMapping("/editbook/{bookId}")
     public String editBook(@PathVariable Long bookId, Model model) {
-        Optional<Book> optionalBook = repository.findById(bookId);
+        Optional<Book> optionalBook = bookRepo.findById(bookId);
         if (!optionalBook.isPresent()) {
             System.out.println("Error: Boook #" + bookId + " not found. It may have been deleted.");
             return "redirect:/booklist";
