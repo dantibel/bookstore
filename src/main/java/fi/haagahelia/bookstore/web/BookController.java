@@ -7,11 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.bookstore.domain.Book;
 import fi.haagahelia.bookstore.domain.BookRepository;
-import fi.haagahelia.bookstore.domain.Category;
 import fi.haagahelia.bookstore.domain.CategoryRepository;
 
 @Controller
@@ -47,14 +45,14 @@ public class BookController {
     public String addBook(Book book, Model model) {
         bookRepo.save(book);
         model.addAttribute("books", bookRepo.findAll());
-        return "booklist";
+        return "redirect:/booklist";
     }
 
     @GetMapping("/deletebook/{bookId}")
     public String deleteBook(@PathVariable Long bookId, Model model) {
         bookRepo.deleteById(bookId);
         model.addAttribute("books", bookRepo.findAll());
-        return "booklist";
+        return "redirect:/booklist";
     }
 
     @GetMapping("/editbook/{bookId}")
