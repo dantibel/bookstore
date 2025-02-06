@@ -57,7 +57,6 @@ public class BookController {
         return "booklist";
     }
 
-    // TODO: fix adding new book entry instead of editing existing one
     @GetMapping("/editbook/{bookId}")
     public String editBook(@PathVariable Long bookId, Model model) {
         Optional<Book> optionalBook = bookRepo.findById(bookId);
@@ -66,6 +65,7 @@ public class BookController {
             return "redirect:/booklist";
         }
         model.addAttribute("book", optionalBook.get());
+        model.addAttribute("categories", categoryRepo.findAll());
         return "addbook";
     }
 }
