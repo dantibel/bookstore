@@ -1,5 +1,8 @@
 package fi.haagahelia.bookstore;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,13 +23,35 @@ public class BookstoreApplication {
 	@Bean
     public CommandLineRunner demo(BookRepository bookRepo, CategoryRepository categoryRepo) {
         return (args) -> {
-			categoryRepo.save(new Category("Documentary"));
-			categoryRepo.save(new Category("Science Fiction"));
-			categoryRepo.save(new Category("Autobiography"));
-			categoryRepo.save(new Category("Satire"));
-			bookRepo.save(new Book("Animal Farm",        "George Orwell",    1945, categoryRepo.findByName("Satire").get(),          "2212343-5",  30));
-			bookRepo.save(new Book("A Farewell to Arms", "Ernest Hemingway", 1929, categoryRepo.findByName("Autobiography").get(),   "1232323-21", 20));
-			bookRepo.save(new Book("The Invincible",     "Stanislaw Lem",    1963, categoryRepo.findByName("Science Fiction").get(), "12345678-9", 20));
+			if (categoryRepo.findAll().isEmpty()) {
+				List<Category> categories = Arrays.asList(
+					new Category("Science Fiction"),
+					new Category("Autobiography"),
+					new Category("Fantasy"),
+					new Category("Satire"),
+					new Category("Epic"),
+					new Category("Romance"),
+					new Category("Novel")
+				);
+
+				for (Category category : categories) {
+					categoryRepo.save(category);
+				}
+			}
+
+			if (bookRepo.findAll().isEmpty()) {
+				List<Book> books = Arrays.asList(
+					new Book("Animal Farm",          "George Orwell",     1945, categoryRepo.findByName("Satire").get(),          "2212343-5",  22),
+    				new Book("A Farewell to Arms",   "Ernest Hemingway",  1929, categoryRepo.findByName("Autobiography").get(),   "1232323-21", 20),
+    				new Book("The Invincible",       "Stanislaw Lem",     1963, categoryRepo.findByName("Science Fiction").get(), "12345678-9", 23),
+    				new Book("Crime and Punishment", "Fyodor Dostoevsky", 1866, categoryRepo.findByName("Novel").get(),           "3869026-44", 25),
+    				new Book("Oddysey",              "Homer",             1614, categoryRepo.findByName("Epic").get(),            "22222222-2", 19)
+				);
+				
+				for (Book book : books) {
+					bookRepo.save(book);
+				}
+			}
 		};
 	}
 
