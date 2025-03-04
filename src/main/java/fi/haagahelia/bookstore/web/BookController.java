@@ -1,5 +1,6 @@
 package fi.haagahelia.bookstore.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.bookstore.domain.Book;
 import fi.haagahelia.bookstore.domain.BookRepository;
@@ -68,4 +70,17 @@ public class BookController {
         model.addAttribute("categories", categoryRepo.findAll());
         return "addbook";
     }
+
+    // RESTful service methods
+
+    @GetMapping(value="/books")
+    public @ResponseBody List<Book> bookListRest() {	
+        return (List<Book>) bookRepo.findAll();
+    }    
+
+    @GetMapping(value="/books/{id}")
+    public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
+    	return bookRepo.findById(bookId);
+    }
+
 }
