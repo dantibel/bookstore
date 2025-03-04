@@ -37,12 +37,11 @@ public class BookRepository
     @Transactional
     public boolean save(Book book) {
         if (book.getId() == null) {
-            String query = "INSERT INTO Book(id, title, author, publicationYear, category, isbn, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Book(title, author, publicationYear, category, isbn, price) VALUES (?, ?, ?, ?, ?, ?)";
             return jdbcTemplate.update(query, book.getTitle(), book.getAuthor(), book.getYear(), book.getCategory().getId(), book.getIsbn(), book.getPrice()) == 1;
         } else {
             String query = "UPDATE Book SET title = ?, author = ?, publicationYear = ?, category = ?, isbn = ?, price = ? WHERE id = ?";
             return jdbcTemplate.update(query, book.getTitle(), book.getAuthor(), book.getYear(), book.getCategory().getId(), book.getIsbn(), book.getPrice(), book.getId()) == 1;
-        }
-        
+        }   
     }
 }

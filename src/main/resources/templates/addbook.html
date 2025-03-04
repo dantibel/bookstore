@@ -24,7 +24,7 @@
         </div>
         <div>
             <label for="category">Category</label>
-            <select id="category" th:field="${book.category}" class="form-control" required>
+            <select id="category" th:field="${book.category.id}" class="form-control" required>
                 <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
             </select>
         </div>
