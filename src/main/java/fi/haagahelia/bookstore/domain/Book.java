@@ -90,4 +90,9 @@ public class Book {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Book[id=%d, title='%s', author='%s', year=%d, category='%s', isbn='%s', price=%.2f]", id, title, author, year, category, isbn, price);
+    }
 }
