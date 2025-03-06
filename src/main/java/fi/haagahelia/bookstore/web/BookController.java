@@ -1,6 +1,5 @@
 package fi.haagahelia.bookstore.web;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -8,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.bookstore.domain.Book;
 import fi.haagahelia.bookstore.domain.BookRepository;
@@ -45,9 +43,7 @@ public class BookController {
 
     @PostMapping("/addbook")
     public String addBook(Book book, Model model) {
-        if (!bookRepo.save(book)) {
-            System.err.println("Failed to save " + book);
-        }
+        bookRepo.save(book);
         model.addAttribute("books", bookRepo.findAll());
         return "redirect:/booklist";
     }
@@ -73,14 +69,14 @@ public class BookController {
 
     // RESTful service methods
 
-    @GetMapping(value="/books")
-    public @ResponseBody List<Book> bookListRest() {	
-        return (List<Book>) bookRepo.findAll();
-    }    
-
-    @GetMapping(value="/books/{id}")
-    public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
-    	return bookRepo.findById(bookId);
-    }
+    //@GetMapping(value="/books")
+    //public @ResponseBody List<Book> bookListRest() {	
+    //    return (List<Book>) bookRepo.findAll();
+    //}    
+//
+    //@GetMapping(value="/books/{id}")
+    //public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
+    //	return bookRepo.findById(bookId);
+    //}
 
 }

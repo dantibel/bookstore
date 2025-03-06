@@ -15,13 +15,13 @@ public class Book {
     private Long id;
     private String title;
     private String author;
-    @Column(name="publicationYear")
+    @Column(name = "publication_year")
     private int year;
     private String isbn;
     private double price;
     
     @ManyToOne
-    @JoinColumn(name = "category.id")
+    @JoinColumn(name = "category")
     private Category category;
 
     public Book() {}

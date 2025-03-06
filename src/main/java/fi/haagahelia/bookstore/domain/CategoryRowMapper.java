@@ -5,7 +5,8 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class CategoryRowMapper implements RowMapper<Category> {
+/*
+ public class CategoryRowMapper implements RowMapper<Category> {
     @Override
     public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
         Category category = new Category();
@@ -14,3 +15,4 @@ public class CategoryRowMapper implements RowMapper<Category> {
         return category;
     }
 }  
+*/

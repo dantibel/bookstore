@@ -5,7 +5,8 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class BookRowMapper implements RowMapper<Book> {
+/* 
+ public class BookRowMapper implements RowMapper<Book> {
     @Override
     public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
         Book book = new Book();
@@ -15,12 +16,13 @@ public class BookRowMapper implements RowMapper<Book> {
         book.setYear(rs.getInt("publicationYear"));
         book.setIsbn(rs.getString("isbn"));
         book.setPrice(rs.getDouble("price"));
-
+        
         Category category = new Category();
         category.setId(rs.getLong("category.id"));
         category.setName(rs.getString("category.name"));
         book.setCategory(category);
-
+        
         return book;
     }
 }    
+*/

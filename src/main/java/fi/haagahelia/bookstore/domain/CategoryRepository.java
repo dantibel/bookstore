@@ -3,37 +3,16 @@ package fi.haagahelia.bookstore.domain;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public class CategoryRepository
-{
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+public interface CategoryRepository extends CrudRepository<Category, Long> {
     
-    @Transactional(readOnly=true)
-    public List<Category> findAll() {
-        String query = "SELECT * FROM Category";
-        return jdbcTemplate.query(query, new CategoryRowMapper());
-    }
+    List<Category> findAll();
 
-    @Transactional(readOnly=true)
-    public Optional<Category> findByName(String name) {
-        String query = "SELECT * FROM Category WHERE name = ?";
-        List<Category> result = jdbcTemplate.query(query, new CategoryRowMapper(), name);
-        assert result.size() <= 1;
-        return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
-    }
+    Optional<Category> findByName(String name);
 
-    @Transactional
-    public boolean save(Category category) {
-        if (category.getId() == null) {
-            String query = "INSERT INTO Category(name) VALUES (?)";
-            return jdbcTemplate.update(query, category.getName()) == 1;
-        }
-        return false;
-    }
+    void deleteById(Long id);
+
+    <T extends Category> T save(Category category);
+
 }
