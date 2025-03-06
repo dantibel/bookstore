@@ -23,6 +23,11 @@ public class BookController {
         this.categoryRepo = categoryRepo;
     }
     
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+    
     @GetMapping("/index")
     public String showBookstore() {
         return "Welcome to the Bookstore!";
@@ -66,17 +71,5 @@ public class BookController {
         model.addAttribute("categories", categoryRepo.findAll());
         return "addbook";
     }
-
-    // RESTful service methods
-
-    //@GetMapping(value="/books")
-    //public @ResponseBody List<Book> bookListRest() {	
-    //    return (List<Book>) bookRepo.findAll();
-    //}    
-//
-    //@GetMapping(value="/books/{id}")
-    //public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
-    //	return bookRepo.findById(bookId);
-    //}
 
 }
