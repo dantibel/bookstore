@@ -8,6 +8,12 @@
     <title>Book List</title>
 </head>
 <body>
+    <header>
+        <div class="user-info">
+            <span th:text="'You are loged in as \'' + ${username} + '\''">Username</span>
+            <a href="/login?logout" class="button">Logout</a>
+        </div>
+    </header>
     <h1>Book List</h1>
     <div class="container">
         <table>

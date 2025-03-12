@@ -103,12 +103,21 @@ a.button {
     color: white;
     border-radius: 4px;
     text-align: center;
-    margin: 20px auto;
+    margin: 10px;
     text-decoration: none;
 }
 
 a.button:hover {
     background-color: #45a049;
+}
+
+.user-info {
+    background-color: lightgrey;
+    padding: 10px;
+    margin: 20px;
+    align-content: center;
+    width: fit-content;
+    height: fit-content;
 }
 
 .action-cell {

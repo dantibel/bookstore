@@ -33,6 +33,8 @@ public class WebSecurityConfig {
 				.loginPage("/login")
 				.defaultSuccessUrl("/booklist", true).permitAll()
 			).logout(logout -> logout
+				.logoutUrl("/login?logout")
+				.logoutSuccessUrl("/login")
 				.permitAll()
 			);
 		return http.build();

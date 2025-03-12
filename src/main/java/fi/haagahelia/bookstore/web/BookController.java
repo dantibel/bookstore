@@ -1,5 +1,6 @@
 package fi.haagahelia.bookstore.web;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -34,8 +35,9 @@ public class BookController {
     }
 
     @GetMapping("/booklist")
-    public String showBookList(Model model) {
+    public String showBookList(Model model, Principal principal) {
         model.addAttribute("books", bookRepo.findAll());
+        model.addAttribute("username", principal.getName());
         return "booklist";
     }
     
