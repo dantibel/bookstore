@@ -24,6 +24,11 @@ public class BookController {
         this.categoryRepo = categoryRepo;
     }
     
+    @GetMapping("/")
+    public String defaultEndpoint() {
+        return "login";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
