@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
 import fi.haagahelia.bookstore.domain.Book;
@@ -14,7 +16,12 @@ import fi.haagahelia.bookstore.domain.Category;
 import fi.haagahelia.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
-public class BookstoreApplication {
+public class BookstoreApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(BookstoreApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -35,7 +42,7 @@ public class BookstoreApplication {
 				);
 
 				for (Category category : categories) {
-					categoryRepo.save(category);
+					categoryRepo.<Category>save(category);
 				}
 			}
 
@@ -49,7 +56,7 @@ public class BookstoreApplication {
 				);
 				
 				for (Book book : books) {
-					bookRepo.save(book);
+					bookRepo.<Book>save(book);
 				}
 			}
 		};

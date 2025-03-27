@@ -50,7 +50,7 @@ public class BookController {
 
     @PostMapping("/addbook")
     public String addBook(Book book, Model model) {
-        bookRepo.save(book);
+        bookRepo.<Book>save(book);
         model.addAttribute("books", bookRepo.findAll());
         return "redirect:/booklist";
     }
